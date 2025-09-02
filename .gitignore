@@ -1,2 +1,4 @@
-application.ini
 **/__pycache__/
+
+*.bundle*
+application.ini
