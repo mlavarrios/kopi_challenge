@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: kopi_app
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/kopi
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    container_name: kopi_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: kopi
+    volumes:
+      - mongo:/data/db
+      - mongo-keyfile-vol:/etc/mongodb/pki
+    ports:
+      - "27017:27017"
+
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+volumes:
+  mongo_data:
