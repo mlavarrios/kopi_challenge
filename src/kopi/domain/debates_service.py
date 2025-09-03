@@ -1,3 +1,4 @@
+from datetime import datetime
 from kopi.application.entities import MessageDTO
 from kopi.domain.entities import Debate, Message
 from kopi.infrastructure.ai_repository import AIRepository
@@ -11,9 +12,10 @@ class DebatesService:
 
     async def debate(self, message: MessageDTO) -> Debate:
         last_messages = []
+        user_message = Message(role="user", message=message.message, created_at=datetime.now())
         if message.conversation_id:
             last_messages = await self.messages_repository.get_last_messages(message.conversation_id)
-        last_messages.append(Message(role="user", message=message.message))
+        last_messages.append(user_message)
 
         prompt = """
         All of your responses should be related to the original conversation topic and stand your ground.
@@ -28,10 +30,12 @@ class DebatesService:
 
         answer = await self.ai_repository.generate_response(prompt=prompt)
 
-        conversation_id = await self.messages_repository.save_message(Message(role="user", message=message.message), conversation_id=message.conversation_id)
-        conversation_id = await self.messages_repository.save_message(Message(role="bot", message=answer.text), conversation_id=conversation_id)
+        conversation_id = await self.messages_repository.save_message(user_message, conversation_id=message.conversation_id)
+        bot_message = Message(role="bot", message=answer.text, created_at=datetime.now())
+        conversation_id = await self.messages_repository.save_message(bot_message, conversation_id=conversation_id)
 
-        messages = last_messages + [Message(role="bot", message=answer.text)]
+        messages = last_messages + [bot_message]
+        
         return Debate(
             conversation_id=conversation_id,
             messages=messages

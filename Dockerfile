@@ -20,5 +20,3 @@ COPY . .
 ENV PYTHONPATH "${PYTHONPATH}:/workspace/src"
 # RUN poetry install
 RUN rm -R *
-
-# CMD ["poetry", "run", "uvicorn", "src.application.debate_controller:router", "--host", "0.0.0.0", "--port", "8000"]
