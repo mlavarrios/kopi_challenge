@@ -14,8 +14,7 @@ class Settings(BaseModel):
     db_collection: str = ""
     db_username: str = ""
     db_password: str = ""
-    supabase_host: str = ""
-    supabase_port: int = 5432
+    supabase_url: str = ""
     supabase_key: str = ""
     supabase_table: str = ""
     json_file_path: str = ""
@@ -26,15 +25,14 @@ class Settings(BaseModel):
         config = configparser.ConfigParser(os.environ)
         config.read([str(current_dir) + "/application.ini", "application.ini"])
         self.gemini_api_key = config.get("gemini", "gemini_api_key")
-        self.db_carrier = "json"
+        self.db_carrier = "supabase"
         self.db_host = config.get("database", "db_host")
         self.db_port = int(config.get("database", "db_port"))
         self.db_name = config.get("database", "db_name")
         self.db_collection = config.get("database", "db_collection")
         self.db_username = config.get("database", "db_username")
         self.db_password = config.get("database", "db_password")
-        self.supabase_host = config.get("supabase", "supabase_host")
-        self.supabase_port = config.getint("supabase", "supabase_port", fallback=5432)
+        self.supabase_url = config.get("supabase", "supabase_url")
         self.supabase_key = config.get("supabase", "supabase_key", fallback="postgres")
         self.supabase_table = config.get("supabase", "supabase_table")
         self.json_file_path = f"{str(current_dir)}/messages.json"

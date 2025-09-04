@@ -1,9 +1,6 @@
-[database]
-db_host = localhost
-db_port = 27017
-db_name = kopi
-db_collection = messages
-db_username = root
-db_password = password
+[supabase]
+supabase_url =
+supabase_key =
+supabase_table =
 [gemini]
-gemini_api_key = 
+gemini_api_key =
