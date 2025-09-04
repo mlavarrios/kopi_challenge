@@ -13,11 +13,11 @@ class MessagesRepository:
         try:
             raw_messages = await self.collection.find(query).sort("created_at", 1).limit(limit).to_list(length=limit)
             messages = [Message(**msg) for msg in raw_messages]
+            return messages
         except Exception as e:
             print("Error retrieving messages:", e)
             raise(e)
 
-        return messages
 
     async def save_message(self, message: Message, conversation_id: str|None) -> str:
         """Save a message to the database and return its inserted ID."""
@@ -28,7 +28,7 @@ class MessagesRepository:
         message_dict["conversation_id"] = conversation_id
         try:
             await self.collection.insert_one(message_dict)
+            return conversation_id
         except Exception as e:
             print("Error saving message:", e)
             raise(e)
-        return conversation_id

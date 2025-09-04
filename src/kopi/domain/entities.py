@@ -4,8 +4,8 @@ from pydantic import BaseModel
 
 class Message(BaseModel):
     role: str
-    message: Optional[str]
-    created_at: datetime
+    message: str
+    created_at: Optional[datetime]
 
 class Debate(BaseModel):
     conversation_id: str
