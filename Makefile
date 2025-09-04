@@ -18,8 +18,8 @@ test:
 
 run:
 	@echo "Starting application..."
-	docker-compose up -d
-	poetry run uvicorn src.main:app --host 0.0.0.0 --port 8081
+	docker-compose up -d --build
+	docker-compose exec app src/ uvicorn src.main:app --host 0.0.0.0 --port 8080
 
 down:
 	@echo "Stopping all running services..."

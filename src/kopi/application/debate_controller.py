@@ -10,7 +10,7 @@ from settings import Settings
 
 router = APIRouter()
 
-@router.post("/debate")
+@router.post("/")
 async def debate(
     message: MessageDTO,
     settings: Annotated[Settings, Depends(Settings.get_settings)],

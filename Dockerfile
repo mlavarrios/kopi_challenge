@@ -1,22 +1,18 @@
+# Use official Python image as base
 FROM python:3.11-slim
 
-RUN mkdir workspace
+# Set working directory
 WORKDIR /workspace
 
-# Install system dependencies
-RUN apt-get update && \
-    apt-get install -y git make curl && \
-    rm -rf /var/lib/apt/lists/*
+# Copy requirements if present
+COPY requirements.txt ./
 
-# Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 - && \
-    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+# Install dependencies if requirements.txt exists
+RUN if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi
 
-# Clean up
-RUN apt-get clean
-RUN pip install "poetry"
-RUN poetry config virtualenvs.create false
+# Copy application code
 COPY . .
 ENV PYTHONPATH "${PYTHONPATH}:/workspace/src"
-# RUN poetry install
-RUN rm -R *
+
+# Default command (change as needed)
+# CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]

@@ -3,17 +3,12 @@ import configparser
 import pathlib
 import os
 from pydantic import BaseModel
-from langchain_community.chat_models import ChatOpenAI
 
 
 class Settings(BaseModel):
-    vector_database_host: str = ""
-    vector_database_port: int = None
-    vector_database_grpc_port: int = None
-    vector_database_collection_name: str = ""
     gemini_api_key: str = ""
     db_host: str = ""
-    db_port: int = None
+    db_port: int = 0
     db_name: str = ""
     db_collection: str = ""
     db_username: str = ""
@@ -35,26 +30,3 @@ class Settings(BaseModel):
     @staticmethod
     def get_settings():
         return Settings()
-
-    @property
-    def get_db_connection_url(self):
-        return f"mongodb://{self.db_username}:{self.db_password}@{self.db_host}:{self.db_port}"
-
-    def get_model_config(self):
-        return ModelsConfig(settings=self)
-
-
-class ModelsConfig:
-    def __init__(self, settings: Settings, bot_id: str | None = None):
-        self.openai = ChatOpenAI(
-            name="gpt-4.1-mini"
-        )
-
-        # self.llm_config = LLMConfig(
-        #     prompt_id=DEFAULT_PROMPT_ID,
-        #     llm=self.openai,
-        #     chain_type="stuff",
-        #     return_source_documents=True,
-        #     access_method="langchain",  # openai_direct #TODO: find a better approach
-        #     search_kwargs={"k": DEFAULT_TOTAL_MATCHES},
-        # )

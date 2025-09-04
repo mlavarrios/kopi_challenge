@@ -19,7 +19,7 @@
 	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	"postCreateCommand": "poetry install",
+	// "postCreateCommand": "poetry install",
 
 
 	// Configure tool-specific properties.
