@@ -31,12 +31,13 @@ class DebatesService:
         answer = await self.ai_repository.generate_response(prompt=prompt)
 
         conversation_id = await self.messages_repository.save_message(user_message, conversation_id=message.conversation_id)
+        
         bot_message = Message(role="bot", message=answer.text, created_at=datetime.now())
         conversation_id = await self.messages_repository.save_message(bot_message, conversation_id=conversation_id)
 
-        messages = last_messages + [bot_message]
-        
+        last_messages.append(bot_message)
+
         return Debate(
             conversation_id=conversation_id,
-            messages=messages
+            messages=last_messages
         )

@@ -10,9 +10,13 @@ class AIRepository:
         self.client = genai.Client(api_key=settings.gemini_api_key)
 
     async def generate_response(self, prompt: str) -> LLMAnswer:
-        response = self.client.models.generate_content(
-            model='gemini-2.0-flash-001', contents=prompt
-        )
-        print(response.text)
+        try:
+            response = self.client.models.generate_content(
+                model='gemini-2.0-flash-001', contents=prompt
+            )
+            print(response.text)
+        except Exception as e:
+            print("Error generating response:", e)
+            raise(e)
 
         return LLMAnswer(text=response.text) if hasattr(response, 'text') else LLMAnswer(text="No response")

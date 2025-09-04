@@ -10,8 +10,12 @@ class MessagesRepository:
 
     async def get_last_messages(self, conversation_id: str, limit: int = 5) -> list[Message]:
         query = {"conversation_id": conversation_id}
-        raw_messages = await self.collection.find(query).sort("created_at", 1).limit(limit).to_list(length=limit)
-        messages = [Message(**msg) for msg in raw_messages]
+        try:
+            raw_messages = await self.collection.find(query).sort("created_at", 1).limit(limit).to_list(length=limit)
+            messages = [Message(**msg) for msg in raw_messages]
+        except Exception as e:
+            print("Error retrieving messages:", e)
+            raise(e)
 
         return messages
 
@@ -26,4 +30,5 @@ class MessagesRepository:
             await self.collection.insert_one(message_dict)
         except Exception as e:
             print("Error saving message:", e)
+            raise(e)
         return conversation_id
