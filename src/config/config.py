@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from kopi.application import debate_controller
+from src.kopi.application import debate_controller
 
 
 def register_routers(app: FastAPI) -> FastAPI:

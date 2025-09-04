@@ -1,6 +1,6 @@
 import uuid
 from pymongo import AsyncMongoClient
-from kopi.domain.entities import Message
+from src.kopi.domain.entities import Message
 
 class MessagesRepository:
     def __init__(self, host: str, port: int, db_name: str, db_collection: str):

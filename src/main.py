@@ -2,7 +2,7 @@
 
 from fastapi.applications import FastAPI
 
-from config.config import register_routers
+from src.config.config import register_routers
 
 
 def init_app() -> FastAPI:

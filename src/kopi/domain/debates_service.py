@@ -1,8 +1,8 @@
 from datetime import datetime
-from kopi.application.entities import MessageDTO
-from kopi.domain.entities import Debate, Message
-from kopi.infrastructure.ai_repository import AIRepository
-from kopi.infrastructure.messages_repository import MessagesRepository
+from src.kopi.application.entities import MessageDTO
+from src.kopi.domain.entities import Debate, Message
+from src.kopi.infrastructure.ai_repository import AIRepository
+from src.kopi.infrastructure.messages_repository import MessagesRepository
 
 
 class DebatesService:

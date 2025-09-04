@@ -1,11 +1,11 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
-from kopi.infrastructure.ai_repository import AIRepository
-from kopi.infrastructure.messages_repository import MessagesRepository
-from kopi.infrastructure.messages_repository_factory import MessagesRepositoryFactory
-from kopi.application.entities import MessageDTO
-from kopi.domain.debates_service import DebatesService
-from settings import Settings
+from src.kopi.infrastructure.ai_repository import AIRepository
+from src.kopi.infrastructure.messages_repository import MessagesRepository
+from src.kopi.infrastructure.messages_repository_factory import MessagesRepositoryFactory
+from src.kopi.application.entities import MessageDTO
+from src.kopi.domain.debates_service import DebatesService
+from src.settings import Settings
 
 
 router = APIRouter()

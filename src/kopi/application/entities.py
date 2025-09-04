@@ -1,6 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel
-from kopi.domain.entities import Message
+from src.kopi.domain.entities import Message
 
 class MessageDTO(BaseModel):
     conversation_id: Optional[str]

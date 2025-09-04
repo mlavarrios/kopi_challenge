@@ -1,7 +1,7 @@
 from google import genai
 
-from kopi.infrastructure.entities import LLMAnswer
-from settings import Settings
+from src.kopi.infrastructure.entities import LLMAnswer
+from src.settings import Settings
 
 settings = Settings.get_settings()
 
