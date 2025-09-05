@@ -15,7 +15,7 @@ install:
 
 test:
 	@echo "Running tests..."
-	pytest
+	docker-compose exec app pytest -v
 
 up:
 	@echo "Starting containers..."

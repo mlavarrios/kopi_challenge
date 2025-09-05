@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from src.kopi.infrastructure.ai_repository_factory import AIRepositoryFactory
 from src.kopi.infrastructure.ai_repository import AIRepository
-from src.kopi.infrastructure.messages_repository import MessagesRepository
+from src.kopi.infrastructure.supabase_messages_repository import SupabaseMessagesRepository
 from src.kopi.infrastructure.messages_repository_factory import MessagesRepositoryFactory
 from src.kopi.application.entities import MessageDTO
 from src.kopi.domain.debates_service import DebatesService
@@ -19,7 +19,7 @@ async def debate(
     message: MessageDTO,
     ai_repository: Annotated[AIRepository, Depends(AIRepositoryFactory.get_ai_repo)],
     messages_repository: Annotated[
-        MessagesRepository,
+        SupabaseMessagesRepository,
         Depends(MessagesRepositoryFactory.get_messages_repo),
     ],
 ):

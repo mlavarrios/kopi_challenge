@@ -9,13 +9,8 @@ services:
     container_name: kopi_app
     ports:
       - "8080:8080"
-  # mongo:
-  #   image: mongo:latest
-  #   container_name: kopi_mongo
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - mongo_data:/data/db
+    volumes:
+      - ./:/workspace
   # supabase:
   #   container_name: kopi_supabase
   #   image: supabase/supabase-dev:latest
