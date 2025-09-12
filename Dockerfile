@@ -15,4 +15,4 @@ COPY . .
 ENV PYTHONPATH "${PYTHONPATH}:/workspace/src"
 
 # Default command (change as needed)
-# CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]

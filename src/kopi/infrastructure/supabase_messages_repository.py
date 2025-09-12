@@ -12,7 +12,7 @@ class SupabaseMessagesRepository:
         try:
             raw_messages = (self.db.select("*")
                 .eq("conversation_id", conversation_id)
-                .limit(5)
+                .limit(10)
                 .execute())
             messages = [Message(**msg) for msg in raw_messages.data]
             return messages
@@ -21,7 +21,6 @@ class SupabaseMessagesRepository:
             raise(e)
 
     async def save_message(self, message: Message) -> bool:
-        message.created_at = None
         message_dict = message.model_dump()
         try:
             self.db.insert(message_dict).execute()

@@ -1,6 +1,6 @@
 [supabase]
-supabase_url =
-supabase_key =
-supabase_table =
+supabase_url = http://host.docker.internal:54321
+supabase_key = 
+supabase_table = messages
 [gemini]
-gemini_api_key =
+gemini_api_key = 

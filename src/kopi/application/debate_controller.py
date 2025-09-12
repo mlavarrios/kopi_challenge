@@ -14,7 +14,7 @@ router = APIRouter()
 async def health_check():
     return "The health check is OK."
 
-@router.post("/")
+@router.post("/chat")
 async def debate(
     message: MessageDTO,
     ai_repository: Annotated[AIRepository, Depends(AIRepositoryFactory.get_ai_repo)],

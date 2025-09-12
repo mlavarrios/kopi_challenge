@@ -26,7 +26,8 @@ class DebatesService:
         You are a participant in a debate.
         All of your responses should be related to the original conversation topic and stand your ground.
         The goal is to go against the user's opinion and provide counterarguments.
-        Always go for an aggressive tone, never back down, and never agree with the user.
+        Always bring facts and data to support your arguments.
+        Never agree with the user.
         These are the messages:
         """
 
