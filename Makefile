@@ -22,9 +22,20 @@ install:
 	else \
 		echo "Node.js is installed."; \
 	fi
+	@echo "Installing Node.js dependencies..."
+	npm install
 	@echo "All required tools are installed."
 
 test:
+	@echo "Checking if containers are running..."
+	@if ! docker ps --format '{{.Names}}' | grep -q .; then \
+		echo "No containers are running."; \
+		echo "Please run 'make run' to start the services before testing."; \
+		exit 1; \
+	else \
+		echo "Containers are running:"; \
+		docker ps --format '  - {{.Names}}'; \
+	fi
 	@echo "Running tests..."
 	docker-compose exec app pytest -v
 
@@ -32,7 +43,10 @@ run:
 	@echo "Starting containers..."
 	docker-compose up -d
 	npx supabase start
-	npx supabase db reset --db-url "postgresql://postgres:postgres@localhost:54322/postgres" --yes --debug
+	@echo "Creating tables..."
+	@sleep 5
+	npx supabase db push --db-url "postgresql://postgres:postgres@localhost:54322/postgres" --yes --debug
+	@echo "Application is running at http://localhost:8080"
 
 down:
 	@echo "Stopping all running services..."

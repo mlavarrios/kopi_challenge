@@ -19,7 +19,7 @@ class Settings(BaseModel):
         self.gemini_api_key = config.get("gemini", "gemini_api_key")
         self.supabase_url = config.get("supabase", "supabase_url")
         self.supabase_key = config.get("supabase", "supabase_key", fallback="postgres")
-        self.supabase_table = config.get("supabase", "supabase_table")
+        self.supabase_table = "messages"
 
     @staticmethod
     def get_settings():
